@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <form action="">
+        <input type="text" placeholder="输入内容" id="ipt">
+        <input type="button" id="btn" value="搜索">
+    </form>
+    <ul id="ul">
+
+    </ul>
+    <script src="./js/ajax.js"></script>
+    <script>
+        btn.onclick = function() {
+            ajax.get({
+                url: "/getData",
+                params: {
+                    name: ipt.value,
+                }
+            }).then(res => {
+                console.log(res)
+                render(res)
+            })
+        }
+
+        function render(data) {
+            ul.innerHTML = data.map(item => {
+                return ` <li>${item.name}</li>`
+            }).join("")
+        }
+    </script>
+</body>
+
+</html>
